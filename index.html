@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exclusive Sneakers</title>
+    
+    <!-- روابط خارجية للخطوط والأيقونات -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Pacifico&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS Styles -->
+    <style>
+        /* General Styling & Resets */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0d292a;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Main Container */
+        .container {
+            width: 95%; /* Use percentage for better flexibility */
+            max-width: 1200px;
+            height: 90vh;
+            max-height: 800px;
+            background: radial-gradient(circle, rgba(14, 88, 89, 0.8) 0%, rgba(3, 30, 31, 1) 60%, #000 100%);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transition: height 0.3s ease; /* Smooth height transition */
+        }
+
+        /* Header */
+        header .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            line-height: 1.1;
+            border: 2px solid #fff;
+            padding: 5px 10px;
+            display: inline-block;
+        }
+
+        /* Main Content */
+        .content {
+            position: relative;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .text-content h1 {
+            margin-bottom: 2rem;
+            line-height: 1;
+        }
+
+        .text-content .exclusive {
+            font-family: 'Pacifico', cursive;
+            font-weight: 400;
+            font-size: 3.5rem;
+            display: block;
+            color: #00e0e0;
+            text-shadow: 0 0 15px rgba(0, 224, 224, 0.5);
+        }
+
+        .text-content .sneakers {
+            font-family: 'Anton', sans-serif;
+            font-size: 5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Shoe Image & Reflection */
+        .shoe-container {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .shoe-img {
+            max-width: 80%;
+            height: auto;
+            filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.6));
+            transition: transform 0.1s ease-out;
+            z-index: 10;
+        }
+
+        .shoe-img::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            bottom: -100%;
+            left: 0;
+            background: url('shoe.png') no-repeat;
+            background-size: contain;
+            transform: scaleY(-1);
+            opacity: 0.15;
+            z-index: -1;
+            mask-image: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+        }
+
+        /* Discount Badge */
+        .discount-badge {
+            position: absolute;
+            top: 15%;
+            left: 10%;
+            background-color: transparent;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            border-radius: 50% / 40%;
+            transform: rotate(-15deg);
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1;
+            z-index: 20;
+        }
+
+        .discount-badge span {
+            font-size: 0.8rem;
+            font-weight: 400;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-align: left;
+        }
+        html[dir="rtl"] .contact-info {
+            text-align: right;
+        }
+
+        .contact-info i {
+            font-size: 1.8rem;
+            color: #00e0e0;
+        }
+
+        .contact-info span {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .contact-info p {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .cta-button {
+            background-color: #fff;
+            color: #000;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 224, 224, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 224, 224, 0.5);
+        }
+
+        .footer-right {
+            text-align: right;
+        }
+        html[dir="rtl"] .footer-right {
+            text-align: left;
+        }
+
+        .footer-right .placeholder-text {
+            font-size: 0.7rem;
+            max-width: 200px;
+            opacity: 0.6;
+            margin-bottom: 10px;
+        }
+
+        .social-icons a {
+            color: #fff;
+            margin-left: 15px;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+        html[dir="rtl"] .social-icons a {
+            margin-left: 0;
+            margin-right: 15px;
+        }
+        .social-icons a:hover {
+            color: #00e0e0;
+        }
+
+        /* =================================== */
+        /* == RESPONSIVE DESIGN ADJUSTMENTS == */
+        /* =================================== */
+
+        /* For Tablets and smaller desktops */
+        @media (max-width: 992px) {
+            .text-content .exclusive { font-size: 3rem; }
+            .text-content .sneakers { font-size: 4rem; }
+            .discount-badge { 
+                font-size: 1.5rem; 
+                padding: 8px 15px;
+            }
+        }
+
+        /* For Mobile Phones */
+        @media (max-width: 768px) {
+            body {
+                align-items: flex-start; /* Align container to top */
+                padding: 2rem 0; /* Add some vertical padding */
+            }
+            .container {
+                height: auto; /* Allow container to grow with content */
+                min-height: 90vh;
+                padding: 20px;
+            }
+            .text-content .exclusive { font-size: 2.2rem; }
+            .text-content .sneakers { font-size: 3rem; }
+            
+            .shoe-img {
+                max-width: 100%; /* Allow shoe to fill its container */
+            }
+
+            .discount-badge {
+                font-size: 1.2rem;
+                padding: 5px 10px;
+                top: 5%;
+                left: 5%;
+            }
+
+            footer {
+                flex-direction: column; /* Stack footer items vertically */
+                gap: 25px; /* Add space between stacked items */
+                text-align: center;
+            }
+
+            .footer-right, html[dir="rtl"] .footer-right {
+                text-align: center; /* Center align the right part of footer */
+            }
+
+            .footer-right .placeholder-text {
+                margin: 0 auto 10px; /* Center the text block */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                LOGO <br> HERE
+            </div>
+        </header>
+
+        <main class="content">
+            <div class="discount-badge">
+                <span>UP TO</span>
+                50%
+                <span>OFF</span>
+            </div>
+
+            <div class="text-content">
+                <h1>
+                    <span class="exclusive">Exclusive</span>
+                    <span class="sneakers">SNEAKERS</span>
+                </h1>
+            </div>
+
+            <div class="shoe-container">
+                <img src="Sneaker2.png" alt="Exclusive Sneakers" class="shoe-img">
+            </div>
+            
+        </main>
+
+        <footer>
+            <div class="contact-info">
+                <i class="fas fa-phone-alt"></i>
+                <div>
+                    <span>CALL FOR DELIVERY</span>
+                    <p>012 3456 789</p>
+                </div>
+            </div>
+
+            <a href="#" class="cta-button">ORDER NOW</a>
+
+            <div class="footer-right">
+                <p class="placeholder-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript Code -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if the user is on a touch device to disable the mouse effect
+            const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+            if (!isTouchDevice()) {
+                const container = document.querySelector('.container');
+                const shoe = document.querySelector('.shoe-img');
+                const title = document.querySelector('.text-content');
+
+                const shoeMoveStrength = 20;
+                const titleMoveStrength = 10;
+
+                container.addEventListener('mousemove', (e) => {
+                    let rect = container.getBoundingClientRect();
+                    let x = e.clientX - rect.left;
+                    let y = e.clientY - rect.top;
+
+                    let xAxis = (x - container.offsetWidth / 2) / (container.offsetWidth / 2);
+                    let yAxis = (y - container.offsetHeight / 2) / (container.offsetHeight / 2);
+
+                    shoe.style.transform = `
+                        rotateY(${xAxis * shoeMoveStrength}deg) 
+                        rotateX(${-yAxis * shoeMoveStrength}deg)
+                        translateZ(20px)
+                    `;
+
+                    title.style.transform = `
+                        translateX(${xAxis * titleMoveStrength}px) 
+                        translateY(${yAxis * titleMoveStrength}px)
+                    `;
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    shoe.style.transition = 'transform 0.5s ease';
+                    title.style.transition = 'transform 0.5s ease';
+                    shoe.style.transform = 'rotateY(0deg) rotateX(0deg) translateZ(0)';
+                    title.style.transform = 'translateX(0px) translateY(0px)';
+                });
+
+                container.addEventListener('mouseenter', () => {
+                    shoe.style.transition = 'transform 0.1s ease-out';
+                    title.style.transition = 'transform 0.1s ease-out';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
